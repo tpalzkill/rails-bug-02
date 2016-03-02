@@ -17,3 +17,22 @@ feature 'Auth' do
   end
 
 end
+
+feature 'Register' do
+  scenario 'Users can register' do
+
+    visit new_registration_url
+    within(".registration-form") { click_on "Register" }
+
+    fill_in "Name", with: "Halah"
+    fill_in "Email", with: "user@example.com"
+    fill_in "Password", with: "password"
+    fill_in "Confirm", with: "password"
+    
+    within(".registration-form") { click_on "Register" }
+
+    expect(page).to have_content("user@example.com");
+    expect(page).to have_content("You are logged in successfully.");
+  end
+
+end
